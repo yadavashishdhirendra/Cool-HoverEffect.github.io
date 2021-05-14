@@ -1,0 +1,204 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>jQuery Expandable</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <link rel="stylesheet" href="jquery.expandable.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700&display=swap" rel="stylesheet">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Hind&display=swap');
+
+        :root {
+            --gray: gray;
+            --black: black;
+        }
+
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        *::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Hide scrollbar for IE, Edge and Firefox */
+        * {
+            -ms-overflow-style: none;
+            /* IE and Edge */
+            scrollbar-width: none;
+            /* Firefox */
+        }
+
+        html,
+        body {
+            font-family: 'Hind', sans-serif;
+            display: flex;
+            justify-content: center;
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            overflow-x: hidden;
+        }
+
+        .to-expand {
+            padding-bottom: 20px;
+        }
+
+        .container {
+            display: flex;
+        }
+
+        main {
+            padding: 10px 20px;
+        }
+
+        img {
+            transition: .5s ease-in-out;
+            margin-left: 0.50rem;
+        }
+
+        img:hover {
+            transform: scale(0.9);
+            transition: .5s ease-in-out;
+        }
+
+
+        .underline--magical {
+            background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+            background-repeat: no-repeat;
+            background-size: 60% 0.2em;
+            background-position: 0 88%;
+            transition: background-size 0.25s ease-in;
+        }
+
+        .underline--magical:hover {
+            background-size: 60% 88%;
+            cursor: pointer;
+        }
+
+        .more {
+            font-weight: 600;
+        }
+
+        @media screen and (max-width: 1080px) {
+            .container {
+                display: block;
+            }
+        }
+    </style>
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script type="text/javascript" src="jquery.expandable.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <main>
+            <section class="testing" style="width: 300px; padding-bottom: 100px;">
+                <div class="description to-expand">
+                    <h1 class="underline--magical" style="color: var(--black);">UI/UX Engineer</h1>
+                    <a href=""><img src="Ashish.jpeg" width="100"
+                            style="border-radius: 100px;box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;" alt=""></a>
+                    <p style="text-align: justify;font-weight: 500;color: var(--gray);">Lorem ipsum dolor sit amet,
+                        consectetur adipiscing
+                        elit. Mauris
+                        faucibus ligula vestibulum venenatis efficitur. Phasellus posuere urna et faucibus vestibulum.
+                        Duis quis eros. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris faucibus ligula
+                        vestibulum venenatis efficitur. Phasellus posuere urna et faucibus vestibulum. Duis quis eros.
+                    </p>
+                    <p style="text-align: justify;font-weight: 500;color: var(--gray);">Lorem ipsum dolor sit amet,
+                        consectetur adipiscing
+                        elit. Mauris
+                        faucibus ligula vestibulum venenatis efficitur. Phasellus posuere urna et faucibus vestibulum.
+                        Duis quis eros.</p>
+                </div>
+            </section>
+        </main>
+        <main>
+            <section class="testing" style="width: 300px; padding-bottom: 100px;">
+                <div class="description to-expand">
+                    <h1 class="underline--magical" style="color: var(--black);">UI/UX Engineer</h1>
+                    <a href=""><img src="Ashish.jpeg" width="100"
+                            style="border-radius: 100px;box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;" alt=""></a>
+                    <p style="text-align: justify;font-weight: 500;color: var(--gray);">Lorem ipsum dolor sit amet,
+                        consectetur adipiscing
+                        elit. Mauris
+                        faucibus ligula vestibulum venenatis efficitur. Phasellus posuere urna et faucibus vestibulum.
+                        Duis quis eros. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris faucibus ligula
+                        vestibulum venenatis efficitur. Phasellus posuere urna et faucibus vestibulum. Duis quis eros.
+                    </p>
+                    <p style="text-align: justify;font-weight: 500;color: var(--gray);">Lorem ipsum dolor sit amet,
+                        consectetur adipiscing
+                        elit. Mauris
+                        faucibus ligula vestibulum venenatis efficitur. Phasellus posuere urna et faucibus vestibulum.
+                        Duis quis eros.</p>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script type="text/javascript">
+        jQuery(document).ready(function () {
+            $('.description').expandable({
+                height: 210
+            });
+        });
+    </script>
+
+    <script type="text/babel">
+        // VARIABLES
+        const magicalUnderlines = Array.from(document.querySelectorAll('.underline--magical'));
+
+        const gradientAPI = 'https://gist.githubusercontent.com/wking-io/3e116c0e5675c8bcad8b5a6dc6ca5344/raw/4e783ce3ad0bcd98811c6531e40256b8feeb8fc8/gradient.json';
+
+        // HELPER FUNCTIONS
+
+        // 1. Get random number in range. Used to get random index from array.
+        const randNumInRange = max => Math.floor(Math.random() * (max - 1));
+
+        // 2. Merge two separate array values at the same index to 
+        // be the same value in new array.
+        const mergeArrays = (arrOne, arrTwo) => arrOne
+            .map((item, i) => `${item} ${arrTwo[i]}`)
+            .join(', ');
+
+        // 3. Curried function to add a background to array of elms
+        const addBackground = (elms) => (color) => {
+            elms.forEach(el => {
+                el.style.backgroundImage = color;
+            });
+        }
+        // 4. Function to get data from API
+        const getData = async (url) => {
+            const response = await fetch(url);
+            const data = await response.json();
+            return data.data;
+        }
+
+        // 5. Partial Application of addBackground to always apply 
+        // background to the magicalUnderlines constant
+        const addBackgroundToUnderlines = addBackground(magicalUnderlines);
+
+        // GRADIENT FUNCTIONS
+
+        // 1. Build CSS formatted linear-gradient from API data
+        const buildGradient = (obj) => `linear-gradient(${obj.direction}, ${mergeArrays(obj.colors, obj.positions)})`;
+
+        // 2. Get single gradient from data pulled in array and
+        // apply single gradient to a callback function
+        const applyGradient = async (url, callback) => {
+            const data = await getData(url);
+            const gradient = buildGradient(data[randNumInRange(data.length)]);
+            callback(gradient);
+        }
+
+        // RESULT
+        applyGradient(gradientAPI, addBackgroundToUnderlines);
+    </script>
+
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</body>
+
+</html>
